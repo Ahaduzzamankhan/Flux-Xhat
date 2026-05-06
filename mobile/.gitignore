@@ -1,6 +1,4 @@
 node_modules/
-ios/
-android/
 *.log
 *.lock
 npm-debug.log*
