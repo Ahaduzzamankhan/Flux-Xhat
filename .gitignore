@@ -1,0 +1,41 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# React Native
+.expo/
+.expo-shared/
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+
+# Android
+android/.gradle/
+android/app/build/
+android/build/
+*.iml
+local.properties
+
+# iOS
+ios/Pods/
+ios/build/
+
+# Rust backend
+backend/target/
+Cargo.lock
+
+# Env files
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

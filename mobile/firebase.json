@@ -1,0 +1,5 @@
+{
+  "react-native": {
+    "android_task_exception_handler_enabled": true
+  }
+}

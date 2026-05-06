@@ -1,0 +1,51 @@
+@base=http://localhost:8080
+@token=replace-after-login
+
+### Health
+GET {{base}}/health
+
+### Register
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "alice@example.com",
+  "password": "correct horse battery staple",
+  "username": "alice",
+  "public_key": "base64-x25519-public-key",
+  "avatar": null
+}
+
+### Login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "alice@example.com",
+  "password": "correct horse battery staple"
+}
+
+### Me
+GET {{base}}/auth/me
+Authorization: Bearer {{token}}
+
+### Create chat
+POST {{base}}/chats
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "recipient_id": "other-user-uid"
+}
+
+### Signed upload
+POST {{base}}/uploads/signed-url
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "chat_id": "direct_a_b",
+  "filename": "photo.jpg",
+  "content_type": "image/jpeg"
+}
+
