@@ -1,0 +1,10 @@
+# Ignore patterns for Prettier
+
+node_modules/
+dist/
+build/
+target/
+.DS_Store
+*.log
+pnpm-lock.yaml
+Cargo.lock

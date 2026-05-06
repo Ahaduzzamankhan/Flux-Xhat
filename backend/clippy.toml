@@ -1,0 +1,12 @@
+# Clippy configuration for Rust linting
+
+# Lint level configuration
+[lints.clippy]
+# Warn on all clippy lints by default
+all = "warn"
+
+# Deny some specific pedantic lints
+pedantic = "warn"
+
+# Allow specific clippy lints that might be too strict
+nursery = "allow"

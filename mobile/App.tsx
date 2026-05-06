@@ -9,6 +9,7 @@ import { colors, radius } from './src/theme';
 const App = () => {
   const restoreSession = useStore((state) => state.restoreSession);
   const token = useStore((state) => state.token);
+  const serverUrl = useStore((state) => state.serverUrl);
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,10 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <AppNavigator authenticated={Boolean(token)} />
+        <AppNavigator
+          authenticated={Boolean(token)}
+          hasServer={Boolean(serverUrl)}
+        />
       </NavigationContainer>
     </SafeAreaProvider>
   );
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
   loadingMarkText: {
-    color: '#FFFFFF',
+    color: '#000000',
     fontSize: 18,
     fontWeight: '900',
   },

@@ -1,0 +1,29 @@
+[build]
+# Optimize binary size and speed
+rustflags = ["-C", "opt-level=3", "-C", "lto=thin"]
+
+[target.x86_64-unknown-linux-gnu]
+# Linux (GNU)
+linker = "gcc"
+
+[target.x86_64-pc-windows-gnu]
+# Windows (GNU)
+linker = "gcc"
+
+[target.aarch64-apple-darwin]
+# macOS ARM64 (Apple Silicon)
+linker = "clang"
+
+[target.x86_64-apple-darwin]
+# macOS x86_64 (Intel)
+linker = "clang"
+
+[term]
+# Color output
+color = 'auto'
+# Verbose output (uncomment for debugging)
+# verbose = true
+
+[net]
+# Retry failed downloads
+retry = 3

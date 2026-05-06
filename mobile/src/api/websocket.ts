@@ -1,4 +1,4 @@
-import { WS_URL } from './api';
+import { getWsUrl } from './api';
 import { MediaMetadata, ServerWsEvent } from '../types';
 
 type EventHandler = (event: ServerWsEvent) => void;
@@ -7,29 +7,21 @@ let socket: WebSocket | null = null;
 let handler: EventHandler | null = null;
 let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 let reconnectAttempts = 0;
-const MAX_RECONNECT_ATTEMPTS = 8;
-const BASE_DELAY_MS = 1000;
+const MAX_RECONNECT = 8;
 
 function scheduleReconnect(token: string, eventHandler: EventHandler, onOpen?: () => void) {
-  if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
-    return;
-  }
-  const delay = Math.min(BASE_DELAY_MS * 2 ** reconnectAttempts, 30_000);
+  if (reconnectAttempts >= MAX_RECONNECT) return;
+  const delay = Math.min(1000 * 2 ** reconnectAttempts, 30_000);
   reconnectAttempts++;
-  reconnectTimer = setTimeout(() => {
-    connectWebSocket(token, eventHandler, onOpen);
-  }, delay);
+  reconnectTimer = setTimeout(() => connectWebSocket(token, eventHandler, onOpen), delay);
 }
 
-export function connectWebSocket(
-  token: string,
-  eventHandler: EventHandler,
-  onOpen?: () => void,
-) {
+export function connectWebSocket(token: string, eventHandler: EventHandler, onOpen?: () => void) {
   disconnectWebSocket();
-
   handler = eventHandler;
-  socket = new WebSocket(`${WS_URL}?token=${encodeURIComponent(token)}`);
+
+  // getWsUrl() reads from store at call time — picks up any server URL set
+  socket = new WebSocket(`${getWsUrl()}?token=${encodeURIComponent(token)}`);
 
   socket.onopen = () => {
     reconnectAttempts = 0;
@@ -40,18 +32,13 @@ export function connectWebSocket(
     try {
       const data = JSON.parse(event.data) as ServerWsEvent;
       handler?.(data);
-    } catch {
-      // Ignore malformed events.
-    }
+    } catch {}
   };
 
-  socket.onerror = () => {
-    // Errors are followed by onclose, handled there.
-  };
+  socket.onerror = () => {};
 
   socket.onclose = () => {
     socket = null;
-    // Auto-reconnect with exponential back-off
     scheduleReconnect(token, eventHandler, onOpen);
   };
 }
@@ -63,7 +50,6 @@ export function disconnectWebSocket() {
   }
   reconnectAttempts = 0;
   if (socket) {
-    // Remove onclose to suppress reconnect after deliberate disconnect
     socket.onclose = null;
     socket.close();
     socket = null;
@@ -71,9 +57,7 @@ export function disconnectWebSocket() {
 }
 
 export function sendWebSocketEvent(event: unknown) {
-  if (!socket || socket.readyState !== WebSocket.OPEN) {
-    return;
-  }
+  if (!socket || socket.readyState !== WebSocket.OPEN) return;
   socket.send(JSON.stringify(event));
 }
 
@@ -99,19 +83,9 @@ export function sendMessageEvent(
 }
 
 export function sendTypingEvent(chatId: string, recipientId: string, isTyping: boolean) {
-  sendWebSocketEvent({
-    type: 'typing',
-    chat_id: chatId,
-    recipient_id: recipientId,
-    is_typing: isTyping,
-  });
+  sendWebSocketEvent({ type: 'typing', chat_id: chatId, recipient_id: recipientId, is_typing: isTyping });
 }
 
 export function sendReactionEvent(chatId: string, messageId: string, emoji: string) {
-  sendWebSocketEvent({
-    type: 'reaction',
-    chat_id: chatId,
-    message_id: messageId,
-    emoji,
-  });
+  sendWebSocketEvent({ type: 'reaction', chat_id: chatId, message_id: messageId, emoji });
 }
