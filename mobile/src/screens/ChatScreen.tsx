@@ -73,7 +73,7 @@ const ChatScreen = () => {
         ]);
         setRecipient(recipientProfile);
         chatMessages.forEach((message) => appendMessage(chatId, message));
-      } catch (err) {
+      } catch {
         setError('Unable to load chat.');
       } finally {
         setLoading(false);
@@ -108,7 +108,7 @@ const ChatScreen = () => {
 
       const list = await Promise.all(
         messages.map(async (message) => {
-          let decryptedText = '[encrypted]';
+          let decryptedText: string;
           try {
             decryptedText = await decryptMessage(
               message.encrypted_content,
@@ -151,15 +151,19 @@ const ChatScreen = () => {
     }
     setSending(true);
     setError(null);
+
+    const privateKey = await getPrivateKey();
+    if (!privateKey) {
+      setError('Encryption key unavailable on this device.');
+      setSending(false);
+      return;
+    }
+
     try {
-      const privateKey = await getPrivateKey();
-      if (!privateKey) {
-        throw new Error('Encryption key unavailable on this device.');
-      }
       const { encrypted, nonce } = await encryptMessage(text.trim(), privateKey, recipient.public_key);
       sendMessageEvent(chatId, recipient.uid, encrypted, nonce, []);
       setText('');
-    } catch (err) {
+    } catch {
       setError('Unable to send message.');
     } finally {
       setSending(false);
@@ -172,10 +176,7 @@ const ChatScreen = () => {
   };
 
   const handleAttachFile = async () => {
-    const result = await launchImageLibrary({
-      mediaType: 'photo',
-      selectionLimit: 1,
-    });
+    const result = await launchImageLibrary({ mediaType: 'photo', selectionLimit: 1 });
 
     if (result.didCancel) return;
     if (result.errorCode) {
@@ -183,38 +184,37 @@ const ChatScreen = () => {
       return;
     }
 
-    if (result.assets && result.assets.length > 0) {
-      if (!token || !user || !recipient) return;
+    if (!result.assets || result.assets.length === 0) return;
+    if (!token || !user || !recipient) return;
 
-      setSending(true);
-      setError(null);
-      try {
-        const asset = result.assets[0];
-        if (!asset.uri || !asset.fileName || !asset.type) {
-          throw new Error('Invalid asset selected.');
-        }
+    const asset = result.assets[0];
+    if (!asset.uri || !asset.fileName || !asset.type) {
+      setError('Invalid asset selected.');
+      return;
+    }
 
-        // 1. Upload directly to Cloudinary (unsigned preset — no backend needed)
-        const cloudinaryResult = await uploadToCloudinary(asset.uri, asset.fileName, asset.type);
+    const privateKey = await getPrivateKey();
+    if (!privateKey) {
+      setError('Encryption key unavailable.');
+      return;
+    }
 
-        // 2. Build metadata and send the message event
-        const media = [buildCloudinaryMediaMetadata(cloudinaryResult, chatId, user.uid)];
-        // 3. Encrypt and send
-        if (!privateKey) {
-          throw new Error('Encryption key unavailable.');
-        }
-        const { encrypted, nonce } = await encryptMessage(
-          text.trim() || '[Image Attachment]',
-          privateKey,
-          recipient.public_key,
-        );
-        sendMessageEvent(chatId, recipient.uid, encrypted, nonce, media);
-        setText('');
-      } catch (err) {
-        setError('Unable to send attachment.');
-      } finally {
-        setSending(false);
-      }
+    setSending(true);
+    setError(null);
+    try {
+      const cloudinaryResult = await uploadToCloudinary(asset.uri, asset.fileName, asset.type);
+      const media = [buildCloudinaryMediaMetadata(cloudinaryResult, chatId, user.uid)];
+      const { encrypted, nonce } = await encryptMessage(
+        text.trim() || '[Image Attachment]',
+        privateKey,
+        recipient.public_key,
+      );
+      sendMessageEvent(chatId, recipient.uid, encrypted, nonce, media);
+      setText('');
+    } catch {
+      setError('Unable to send attachment.');
+    } finally {
+      setSending(false);
     }
   };
 
@@ -401,4 +401,3 @@ const styles = StyleSheet.create({
 });
 
 export default ChatScreen;
-
