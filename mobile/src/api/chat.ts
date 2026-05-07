@@ -2,16 +2,11 @@ import { api, authHeaders } from './api';
 import { Chat, MessageMetadata, UserProfile } from '../types';
 
 export async function fetchChats(token: string): Promise<Chat[]> {
-  const response = await api.get<Chat[]>('/chats', {
-    headers: authHeaders(token),
-  });
+  const response = await api.get<Chat[]>('/chats', { headers: authHeaders(token) });
   return response.data;
 }
 
-export async function fetchChatMessages(
-  token: string,
-  chatId: string,
-): Promise<MessageMetadata[]> {
+export async function fetchChatMessages(token: string, chatId: string): Promise<MessageMetadata[]> {
   const response = await api.get<MessageMetadata[]>(`/chats/${chatId}/messages`, {
     headers: authHeaders(token),
   });
@@ -28,9 +23,7 @@ export async function createChat(token: string, recipientId: string): Promise<Ch
 }
 
 export async function fetchUser(token: string, uid: string): Promise<UserProfile> {
-  const response = await api.get<UserProfile>(`/users/${uid}`, {
-    headers: authHeaders(token),
-  });
+  const response = await api.get<UserProfile>(`/users/${uid}`, { headers: authHeaders(token) });
   return response.data;
 }
 

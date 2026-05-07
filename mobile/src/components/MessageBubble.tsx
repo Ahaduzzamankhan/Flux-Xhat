@@ -28,9 +28,7 @@ const MessageBubble = ({ message, isOwn, decryptedText }: Props) => {
         {reactions.length > 0 ? (
           <View style={styles.reactions}>
             {reactions.map(([emoji, users]) => (
-              <Text key={emoji} style={styles.reaction}>
-                {emoji} {users.length}
-              </Text>
+              <Text key={emoji} style={styles.reaction}>{emoji} {users.length}</Text>
             ))}
           </View>
         ) : null}
@@ -40,43 +38,20 @@ const MessageBubble = ({ message, isOwn, decryptedText }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginVertical: 5,
-    marginHorizontal: 16,
-    flexDirection: 'row',
-  },
-  left: {
-    justifyContent: 'flex-start',
-  },
-  right: {
-    justifyContent: 'flex-end',
-  },
-  bubble: {
-    maxWidth: '78%',
-    paddingHorizontal: 14,
-    paddingVertical: 11,
-    borderRadius: radius.md,
-  },
-  bubbleOwn: {
-    backgroundColor: colors.primary,
-    borderBottomRightRadius: 4,
-  },
+  container: { marginVertical: 5, marginHorizontal: 16, flexDirection: 'row' },
+  left: { justifyContent: 'flex-start' },
+  right: { justifyContent: 'flex-end' },
+  bubble: { maxWidth: '78%', paddingHorizontal: 14, paddingVertical: 11, borderRadius: radius.md },
+  bubbleOwn: { backgroundColor: colors.primary, borderBottomRightRadius: 4 },
   bubbleGuest: {
     backgroundColor: colors.surface,
     borderBottomLeftRadius: 4,
     borderWidth: 1,
     borderColor: colors.border,
   },
-  messageText: {
-    fontSize: 15,
-    lineHeight: 21,
-  },
-  messageOwn: {
-    color: '#000000',
-  },
-  messageGuest: {
-    color: colors.ink,
-  },
+  messageText: { fontSize: 15, lineHeight: 21 },
+  messageOwn: { color: '#000000' },
+  messageGuest: { color: colors.ink },
   mediaPill: {
     marginTop: 8,
     borderRadius: radius.pill,
@@ -84,27 +59,12 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     alignSelf: 'flex-start',
   },
-  mediaOwn: {
-    backgroundColor: 'rgba(255,255,255,0.18)',
-  },
-  mediaGuest: {
-    backgroundColor: colors.surfaceMuted,
-  },
-  mediaLabel: {
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  mediaLabelOwn: {
-    color: '#FFFFFF',
-  },
-  mediaLabelGuest: {
-    color: colors.inkMuted,
-  },
-  reactions: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    marginTop: 8,
-  },
+  mediaOwn: { backgroundColor: 'rgba(255,255,255,0.18)' },
+  mediaGuest: { backgroundColor: colors.surfaceMuted },
+  mediaLabel: { fontSize: 12, fontWeight: '700' },
+  mediaLabelOwn: { color: '#FFFFFF' },
+  mediaLabelGuest: { color: colors.inkMuted },
+  reactions: { flexDirection: 'row', flexWrap: 'wrap', marginTop: 8 },
   reaction: {
     overflow: 'hidden',
     borderRadius: radius.pill,
@@ -120,4 +80,3 @@ const styles = StyleSheet.create({
 });
 
 export default MessageBubble;
-

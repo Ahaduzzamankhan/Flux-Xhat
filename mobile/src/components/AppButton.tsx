@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  Pressable,
-  StyleSheet,
-  Text,
-  ViewStyle,
-} from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Text, ViewStyle } from 'react-native';
 import { colors, radius } from '../theme';
 
 type Props = {
@@ -17,14 +11,7 @@ type Props = {
   style?: ViewStyle;
 };
 
-const AppButton = ({
-  title,
-  onPress,
-  variant = 'primary',
-  disabled,
-  loading,
-  style,
-}: Props) => {
+const AppButton = ({ title, onPress, variant = 'primary', disabled, loading, style }: Props) => {
   return (
     <Pressable
       accessibilityRole="button"
@@ -65,34 +52,14 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 8,
   },
-  secondary: {
-    backgroundColor: colors.primarySoft,
-  },
-  ghost: {
-    backgroundColor: 'transparent',
-  },
-  danger: {
-    backgroundColor: colors.dangerSoft,
-  },
-  disabled: {
-    opacity: 0.55,
-  },
-  pressed: {
-    opacity: 0.82,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: '800',
-    letterSpacing: 1.2,
-    textTransform: 'uppercase',
-  },
-  labelLight: {
-    color: '#FFFFFF',
-  },
-  labelDark: {
-    color: colors.primaryDark,
-  },
+  secondary: { backgroundColor: colors.primarySoft },
+  ghost: { backgroundColor: 'transparent' },
+  danger: { backgroundColor: colors.dangerSoft },
+  disabled: { opacity: 0.55 },
+  pressed: { opacity: 0.82 },
+  label: { fontSize: 16, fontWeight: '800', letterSpacing: 1.2, textTransform: 'uppercase' },
+  labelLight: { color: '#FFFFFF' },
+  labelDark: { color: colors.primaryDark },
 });
 
 export default AppButton;
-

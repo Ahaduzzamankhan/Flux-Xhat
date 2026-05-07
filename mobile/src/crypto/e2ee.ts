@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import nacl from 'tweetnacl';
-import { secretbox, randomBytes } from 'tweetnacl';
+import { randomBytes } from 'tweetnacl';
 import { Buffer } from 'buffer';
 
 const PRIVATE_KEY_KEY = 'PRIVATE_CHAT_E2EE_PRIVATE_KEY';
@@ -43,9 +43,7 @@ export async function encryptMessage(
   const nonce = randomBytes(nacl.box.nonceLength);
   const secretKeyBytes = decodeBase64(myPrivateKey);
   const publicKeyBytes = decodeBase64(recipientPublicKey);
-
   const ciphertext = nacl.box(Buffer.from(plaintext, 'utf-8'), nonce, publicKeyBytes, secretKeyBytes);
-
   return {
     encrypted: encodeBase64(ciphertext),
     nonce: encodeBase64(nonce),
@@ -62,11 +60,9 @@ export async function decryptMessage(
   const ciphertextBytes = decodeBase64(encryptedPayload);
   const secretKeyBytes = decodeBase64(myPrivateKey);
   const publicKeyBytes = decodeBase64(senderPublicKey);
-
   const plaintext = nacl.box.open(ciphertextBytes, nonceBytes, publicKeyBytes, secretKeyBytes);
   if (!plaintext) {
     throw new Error('Message decryption failed');
   }
-
   return Buffer.from(plaintext).toString('utf-8');
 }

@@ -43,24 +43,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  titleRow: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  copy: {
-    flex: 1,
-  },
-  title: {
-    color: colors.ink,
-    fontSize: 26,
-    fontWeight: '800',
-  },
-  subtitle: {
-    color: colors.inkMuted,
-    fontSize: 13,
-    marginTop: 3,
-  },
+  titleRow: { flex: 1, flexDirection: 'row', alignItems: 'center' },
+  copy: { flex: 1 },
+  title: { color: colors.ink, fontSize: 26, fontWeight: '800' },
+  subtitle: { color: colors.inkMuted, fontSize: 13, marginTop: 3 },
   backButton: {
     width: 38,
     height: 38,
@@ -70,12 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginRight: 12,
   },
-  backText: {
-    color: colors.ink,
-    fontSize: 23,
-    fontWeight: '700',
-    marginTop: -2,
-  },
+  backText: { color: colors.ink, fontSize: 23, fontWeight: '700', marginTop: -2 },
   action: {
     minHeight: 38,
     paddingHorizontal: 14,
@@ -85,11 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 12,
   },
-  actionText: {
-    color: colors.primary,
-    fontWeight: '800',
-  },
+  actionText: { color: colors.primary, fontWeight: '800' },
 });
 
 export default ScreenHeader;
-

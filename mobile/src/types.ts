@@ -35,7 +35,6 @@ export type MessageMetadata = {
   reactions: Record<string, string[]>;
 };
 
-// WebSocket events sent by server
 export type ServerWsEvent =
   | {
       type: 'presence';
@@ -65,7 +64,6 @@ export type ServerWsEvent =
       message: string;
     };
 
-// WebSocket events sent by client
 export type ClientWsEvent =
   | { type: 'join_chat'; chat_id: string }
   | {

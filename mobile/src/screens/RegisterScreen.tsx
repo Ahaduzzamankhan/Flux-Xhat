@@ -45,12 +45,7 @@ const RegisterScreen = () => {
       </View>
 
       <View style={styles.panel}>
-        <AppTextInput
-          label="Username"
-          placeholder="Display name"
-          value={username}
-          onChangeText={setUsername}
-        />
+        <AppTextInput label="Username" placeholder="Display name" value={username} onChangeText={setUsername} />
         <AppTextInput
           label="Email"
           placeholder="you@example.com"
@@ -72,34 +67,17 @@ const RegisterScreen = () => {
 
       <View style={styles.bottomRow}>
         <Text style={styles.smallText}>Already registered?</Text>
-        <Text style={styles.link} onPress={() => navigation.navigate('Login')}>
-          Sign in
-        </Text>
+        <Text style={styles.link} onPress={() => navigation.navigate('Login')}>Sign in</Text>
       </View>
     </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    backgroundColor: colors.background,
-  },
-  hero: {
-    marginBottom: 28,
-  },
-  title: {
-    color: colors.ink,
-    fontSize: 34,
-    fontWeight: '900',
-  },
-  subtitle: {
-    color: colors.inkMuted,
-    fontSize: 16,
-    marginTop: 8,
-  },
+  container: { flex: 1, padding: 20, justifyContent: 'center', backgroundColor: colors.background },
+  hero: { marginBottom: 28 },
+  title: { color: colors.ink, fontSize: 34, fontWeight: '900' },
+  subtitle: { color: colors.inkMuted, fontSize: 16, marginTop: 8 },
   panel: {
     backgroundColor: colors.surface,
     borderRadius: radius.md,
@@ -108,26 +86,10 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     ...shadow,
   },
-  bottomRow: {
-    marginTop: 22,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  smallText: {
-    color: colors.inkMuted,
-    marginRight: 8,
-  },
-  link: {
-    color: colors.primary,
-    fontWeight: '800',
-  },
-  error: {
-    color: colors.danger,
-    marginBottom: 14,
-    textAlign: 'center',
-    fontWeight: '600',
-  },
+  bottomRow: { marginTop: 22, flexDirection: 'row', justifyContent: 'center' },
+  smallText: { color: colors.inkMuted, marginRight: 8 },
+  link: { color: colors.primary, fontWeight: '800' },
+  error: { color: colors.danger, marginBottom: 14, textAlign: 'center', fontWeight: '600' },
 });
 
 export default RegisterScreen;
-
