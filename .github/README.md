@@ -43,4 +43,4 @@ pull_request_template.md provides a standard format for all PRs including:
 - Testing performed
 - Deployment notes
 
-See [CONTRIBUTING.md](../../CONTRIBUTING.md) for submission guidelines.
+See [CONTRIBUTING.md](../CONTRIBUTING.md) for submission guidelines.

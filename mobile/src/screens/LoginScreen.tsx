@@ -6,7 +6,7 @@ import { login } from '../api/auth';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import { useStore } from '../store/useStore';
-import { colors, radius, shadow } from '../config/theme';
+import { colors, radius } from '../config/theme';
 
 const LoginScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();

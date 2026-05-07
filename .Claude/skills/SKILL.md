@@ -523,11 +523,11 @@ GET    /ws?token=...
 
 ## Related Documentation
 
-- [README.md](../README.md) — Project overview and setup
-- [SETUP.md](../SETUP.md) — Deployment guide
-- [docs/api.http](../docs/api.http) — API request examples
-- [docs/firestore-security-rules.md](../docs/firestore-security-rules.md) — DB access control
-- [docs/firestore-indexes.json](../docs/firestore-indexes.json) — Query optimization
+- [README.md](../../README.md) — Project overview and setup
+- [SETUP.md](../../SETUP.md) — Deployment guide
+- [docs/api.http](../../docs/api.http) — API request examples
+- [docs/firestore-security-rules.md](../../docs/firestore-security-rules.md) — DB access control
+- [docs/firestore-indexes.json](../../docs/firestore-indexes.json) — Query optimization
 
 ---
 

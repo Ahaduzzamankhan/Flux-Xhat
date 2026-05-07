@@ -10,9 +10,9 @@ assignees: ''
 
 **Do NOT describe the vulnerability in detail here.** This repository is public.
 
-Please report security vulnerabilities privately to: **[security@yourdomain.com](mailto:security@yourdomain.com)**
+Please report security vulnerabilities privately to the maintainers.
 
-See [SECURITY.md](https://github.com/yourusername/fluxenite-chat/blob/main/SECURITY.md) for details.
+See [SECURITY.md](../../SECURITY.md) for details.
 
 ---
 
@@ -24,7 +24,7 @@ See [SECURITY.md](https://github.com/yourusername/fluxenite-chat/blob/main/SECUR
 
 ## What to Include in Your Email
 
-Include the following in your email to security@yourdomain.com (not here):
+Include the following in your email (not here):
 
 1. Detailed description of the vulnerability
 2. Steps to reproduce (if applicable)
