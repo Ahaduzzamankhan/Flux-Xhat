@@ -1,5 +1,5 @@
 import { api, authHeaders } from './api';
-import { UserProfile } from '../types';
+import { UserProfile } from '../types/index';
 
 export type AuthResponse = {
   token: string;

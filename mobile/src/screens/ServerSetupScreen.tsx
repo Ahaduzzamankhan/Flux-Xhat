@@ -15,7 +15,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useStore } from '../store/useStore';
 import AppTextInput from '../components/AppTextInput';
 import AppButton from '../components/AppButton';
-import { colors, radius } from '../theme';
+import { colors, radius } from '../config/theme';
 
 const PRESETS = [
   { name: 'Self-Hosted', detail: 'Your own VPS, Docker, or bare metal server', hint: 'https://chat.yourdomain.com' },

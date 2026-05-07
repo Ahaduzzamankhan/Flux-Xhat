@@ -1,4 +1,5 @@
 import { initializeApp, getApps } from '@react-native-firebase/app';
+// Internal import updated via refactor
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBAg8WrMYHQAIaau6fKMbVd-vcN-6Tqjfk',

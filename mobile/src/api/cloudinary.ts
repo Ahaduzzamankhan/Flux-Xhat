@@ -1,4 +1,4 @@
-import { MediaMetadata } from '../types';
+import { MediaMetadata } from '../types/index';
 
 const CLOUD_NAME = 'dhsvtbdgi';
 const UPLOAD_PRESET = 'Fluxenite';

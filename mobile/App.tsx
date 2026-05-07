@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useStore } from './src/store/useStore';
 import { AppNavigator } from './src/navigation';
-import { colors, radius } from './src/theme';
+import { colors, radius } from './src/config/theme';
 
 const App = () => {
   const restoreSession = useStore((state) => state.restoreSession);

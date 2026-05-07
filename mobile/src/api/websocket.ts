@@ -1,5 +1,5 @@
 import { getWsUrl } from './api';
-import { MediaMetadata, ServerWsEvent } from '../types';
+import { MediaMetadata, ServerWsEvent } from '../types/index';
 
 type EventHandler = (event: ServerWsEvent) => void;
 
