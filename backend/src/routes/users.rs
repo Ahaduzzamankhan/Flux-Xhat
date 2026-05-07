@@ -6,7 +6,7 @@ use crate::{
 };
 use axum::{
     extract::{Path, Query, State},
-    routing::{get, patch},
+    routing::{get},
     Json, Router,
 };
 use serde::Deserialize;

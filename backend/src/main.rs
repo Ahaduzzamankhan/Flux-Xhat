@@ -12,12 +12,10 @@ use config::Config;
 use state::AppState;
 use tower_http::{cors::{Any, CorsLayer}, set_header::SetResponseHeaderLayer, trace::TraceLayer};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use axum::http::{header, Method};
+use axum::http::{header, HeaderValue, Method};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
-    dotenvy::dotenv().ok();
-
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| {
             "private_chat_backend=debug,tower_http=debug,axum=info".into()
@@ -49,9 +47,9 @@ async fn main() -> anyhow::Result<()> {
         .merge(routes::chats::router())
         .merge(routes::users::router())
         .merge(routes::ws::router())
-        .layer(SetResponseHeaderLayer::if_not_present(header::X_CONTENT_TYPE_OPTIONS, "nosniff"))
-        .layer(SetResponseHeaderLayer::if_not_present(header::X_FRAME_OPTIONS, "DENY"))
-        .layer(SetResponseHeaderLayer::if_not_present(header::X_XSS_PROTECTION, "1; mode=block"))
+        .layer(SetResponseHeaderLayer::if_not_present(header::X_CONTENT_TYPE_OPTIONS, HeaderValue::from_static("nosniff")))
+        .layer(SetResponseHeaderLayer::if_not_present(header::X_FRAME_OPTIONS, HeaderValue::from_static("DENY")))
+        .layer(SetResponseHeaderLayer::if_not_present(header::X_XSS_PROTECTION, HeaderValue::from_static("1; mode=block")))
         .layer(cors)
         .layer(TraceLayer::new_for_http())
         .with_state(state);

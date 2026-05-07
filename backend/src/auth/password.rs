@@ -1,4 +1,4 @@
-use anyhow::{Context, Result};
+use anyhow::{anyhow, Result};
 use argon2::{
     password_hash::{PasswordHash, PasswordHasher, PasswordVerifier, SaltString},
     Argon2,
@@ -10,7 +10,7 @@ pub fn hash_password(password: &str) -> Result<String> {
     Argon2::default()
         .hash_password(password.as_bytes(), &salt)
         .map(|hash| hash.to_string())
-        .context("failed to hash password")
+        .map_err(|e| anyhow!("failed to hash password: {}", e))
 }
 
 pub fn verify_password(password: &str, hash: &str) -> bool {

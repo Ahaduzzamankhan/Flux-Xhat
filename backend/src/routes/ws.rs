@@ -40,7 +40,7 @@ async fn ws_handler(
         .or_else(|| query.map(|query| query.token))
         .ok_or(AppError::Unauthorized)?;
     let claims = jwt::verify_token(&state.config, &token)?;
-    Ok(ws.on_upgrade(move |socket| handle_socket(state, claims.sub)))
+    Ok(ws.on_upgrade(move |socket| handle_socket(state, claims.sub, socket)))
 }
 
 fn extract_bearer_token(headers: &HeaderMap) -> Option<String> {

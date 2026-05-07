@@ -1,10 +1,14 @@
 use anyhow::{anyhow, Context, Result};
+use yup_oauth2::hyper_rustls::HttpsConnector;
+use hyper_util::client::legacy::connect::HttpConnector;
 use reqwest::Client;
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::{json, Map, Value};
 use std::{collections::HashMap, path::PathBuf, sync::Arc};
 use tokio::sync::Mutex;
-use yup_oauth2::{read_service_account_key, ServiceAccountAuthenticator};
+use yup_oauth2::{authenticator::Authenticator, read_service_account_key, ServiceAccountAuthenticator};
+
+type Auth = Authenticator<HttpsConnector<HttpConnector>>;
 
 const DATASTORE_SCOPE: &str = "https://www.googleapis.com/auth/datastore";
 
@@ -12,7 +16,7 @@ const DATASTORE_SCOPE: &str = "https://www.googleapis.com/auth/datastore";
 pub struct FirestoreClient {
     project_id: String,
     http: Client,
-    auth: Arc<Mutex<ServiceAccountAuthenticator>>,
+    auth: Arc<Mutex<Auth>>,
 }
 
 #[derive(Debug, Deserialize)]
