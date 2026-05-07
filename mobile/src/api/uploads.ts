@@ -1,6 +1,4 @@
 import { api, authHeaders } from './api';
-import RNFS from 'react-native-fs';
-import { Buffer } from 'buffer';
 import { MediaMetadata } from '../types';
 
 export type SignedUpload = {
@@ -29,14 +27,13 @@ export async function uploadFileToSignedUrl(
   fileUri: string,
   contentType: string,
 ): Promise<void> {
-  const base64Data = await RNFS.readFile(fileUri, 'base64');
+  const { Buffer } = await import('buffer');
+  const RNFS = await import('react-native-fs');
+  const base64Data = await RNFS.default.readFile(fileUri, 'base64');
   const body = Buffer.from(base64Data, 'base64');
-
   await fetch(uploadUrl, {
     method: 'PUT',
-    headers: {
-      'Content-Type': contentType,
-    },
+    headers: { 'Content-Type': contentType },
     body,
   });
 }
@@ -48,11 +45,5 @@ export function buildFileMetadata(
   chatId: string,
   uploaderId: string,
 ): MediaMetadata {
-  return {
-    file_url: fileUrl,
-    file_type: fileType,
-    file_size: fileSize,
-    chat_id: chatId,
-    uploader_id: uploaderId,
-  };
+  return { file_url: fileUrl, file_type: fileType, file_size: fileSize, chat_id: chatId, uploader_id: uploaderId };
 }

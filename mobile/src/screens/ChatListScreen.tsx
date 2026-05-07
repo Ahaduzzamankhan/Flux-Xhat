@@ -27,15 +27,14 @@ const ChatListScreen = () => {
   const user = useStore((state) => state.user);
   const setChats = useStore((state) => state.setChats);
   const chats = useStore((state) => state.chats);
+  const online = useStore((state) => state.online);
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState<UserProfile[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    if (token) {
-      loadChats();
-    }
+    if (token) loadChats();
   }, [token]);
 
   const loadChats = async () => {
@@ -43,7 +42,7 @@ const ChatListScreen = () => {
     try {
       const data = await fetchChats(token!);
       setChats(data);
-    } catch (err) {
+    } catch {
       setError('Unable to load chats. Check your connection.');
     }
   };
@@ -55,37 +54,30 @@ const ChatListScreen = () => {
   };
 
   const handleSearch = async () => {
-    if (!query.trim()) {
-      setSearchResults([]);
-      return;
-    }
+    if (!query.trim()) { setSearchResults([]); return; }
     setError(null);
     try {
       const results = await searchUsers(token!, query.trim());
-      setSearchResults(results.filter((result) => result.uid !== user?.uid));
-    } catch (err) {
+      setSearchResults(results.filter((r) => r.uid !== user?.uid));
+    } catch {
       setError('Search failed. Use username or email to find a user.');
     }
   };
 
   const handleStartChat = async (recipient: UserProfile) => {
-    if (!token) {
-      return;
-    }
+    if (!token) return;
     try {
       const chat = await createChat(token, recipient.uid);
-      setChats([chat, ...chats.filter((item) => item.chat_id !== chat.chat_id)]);
+      setChats([chat, ...chats.filter((c) => c.chat_id !== chat.chat_id)]);
       navigation.navigate('Chat', {
         chatId: chat.chat_id,
         recipientId: recipient.uid,
         recipientName: recipient.username,
       });
-    } catch (err) {
+    } catch {
       setError('Unable to open chat. Try again.');
     }
   };
-
-  const online = useStore((state) => state.online);
 
   const renderChat = ({ item }: { item: Chat }) => {
     const participantId = item.participants.find((id) => id !== user?.uid) || item.participants[0];
@@ -93,13 +85,11 @@ const ChatListScreen = () => {
     return (
       <Pressable
         style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}
-        onPress={() =>
-          navigation.navigate('Chat', {
-            chatId: item.chat_id,
-            recipientId: participantId,
-            recipientName: participantId,
-          })
-        }
+        onPress={() => navigation.navigate('Chat', {
+          chatId: item.chat_id,
+          recipientId: participantId,
+          recipientName: participantId,
+        })}
       >
         <Avatar name={participantId} online={isOnline} />
         <View style={styles.rowCopy}>
@@ -173,10 +163,7 @@ const ChatListScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-  },
+  container: { flex: 1, backgroundColor: colors.background },
   searchPanel: {
     marginHorizontal: 20,
     marginBottom: 12,
@@ -187,16 +174,8 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     ...shadow,
   },
-  error: {
-    color: colors.danger,
-    textAlign: 'center',
-    marginBottom: 8,
-    fontWeight: '600',
-  },
-  list: {
-    paddingHorizontal: 20,
-    paddingBottom: 24,
-  },
+  error: { color: colors.danger, textAlign: 'center', marginBottom: 8, fontWeight: '600' },
+  list: { paddingHorizontal: 20, paddingBottom: 24 },
   row: {
     minHeight: 76,
     padding: 14,
@@ -208,23 +187,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  rowPressed: {
-    opacity: 0.78,
-  },
-  rowCopy: {
-    flex: 1,
-    marginLeft: 12,
-  },
-  rowTitle: {
-    color: colors.ink,
-    fontSize: 16,
-    fontWeight: '800',
-  },
-  rowSubtitle: {
-    color: colors.inkMuted,
-    fontSize: 13,
-    marginTop: 5,
-  },
+  rowPressed: { opacity: 0.78 },
+  rowCopy: { flex: 1, marginLeft: 12 },
+  rowTitle: { color: colors.ink, fontSize: 16, fontWeight: '800' },
+  rowSubtitle: { color: colors.inkMuted, fontSize: 13, marginTop: 5 },
   chevron: {
     width: 28,
     height: 28,
@@ -233,31 +199,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  chevronText: {
-    color: colors.inkMuted,
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  smallButton: {
-    minHeight: 38,
-    paddingHorizontal: 12,
-  },
-  empty: {
-    alignItems: 'center',
-    paddingTop: 72,
-    paddingHorizontal: 30,
-  },
-  emptyTitle: {
-    color: colors.ink,
-    fontSize: 20,
-    fontWeight: '900',
-  },
-  emptyText: {
-    color: colors.inkMuted,
-    textAlign: 'center',
-    marginTop: 8,
-    lineHeight: 20,
-  },
+  chevronText: { color: colors.inkMuted, fontSize: 18, fontWeight: '700' },
+  smallButton: { minHeight: 38, paddingHorizontal: 12 },
+  empty: { alignItems: 'center', paddingTop: 72, paddingHorizontal: 30 },
+  emptyTitle: { color: colors.ink, fontSize: 20, fontWeight: '900' },
+  emptyText: { color: colors.inkMuted, textAlign: 'center', marginTop: 8, lineHeight: 20 },
 });
 
 export default ChatListScreen;

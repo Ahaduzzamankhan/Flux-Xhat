@@ -35,19 +35,9 @@ const Avatar = ({ name, uri, size = 48, online }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  shell: {
-    backgroundColor: colors.primarySoft,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  initial: {
-    color: colors.primaryDark,
-    fontWeight: '800',
-  },
+  shell: { backgroundColor: colors.primarySoft, alignItems: 'center', justifyContent: 'center' },
+  image: { width: '100%', height: '100%' },
+  initial: { color: colors.primaryDark, fontWeight: '800' },
   presence: {
     position: 'absolute',
     width: 12,
@@ -59,4 +49,3 @@ const styles = StyleSheet.create({
 });
 
 export default Avatar;
-

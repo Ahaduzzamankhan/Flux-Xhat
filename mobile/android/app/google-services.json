@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "123456789",
-    "project_id": "fluxenite-xhat",
-    "storage_bucket": "fluxenite-xhat.appspot.com"
+    "project_number": "288632176888",
+    "project_id": "abfluxenite",
+    "storage_bucket": "abfluxenite.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:123456789:android:abcdef123456",
+        "mobilesdk_app_id": "1:288632176888:android:abcdef123456",
         "android_client_info": {
           "package_name": "com.fluxenite.xhat"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "dummy-api-key"
+          "current_key": "AIzaSyBAg8WrMYHQAIaau6fKMbVd-vcN-6Tqjfk"
         }
       ],
       "services": {

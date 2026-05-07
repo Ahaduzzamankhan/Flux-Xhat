@@ -1,5 +1,3 @@
-// Firebase configuration for Fluxenite Chat
-// Credentials from project: abfluxenite
 import { initializeApp, getApps } from '@react-native-firebase/app';
 
 const firebaseConfig = {
@@ -12,7 +10,6 @@ const firebaseConfig = {
   measurementId: 'G-3TFERWY122',
 };
 
-// Only initialize if not already initialized (hot-reload safety)
 if (getApps().length === 0) {
   initializeApp(firebaseConfig);
 }

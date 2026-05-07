@@ -19,8 +19,6 @@ function scheduleReconnect(token: string, eventHandler: EventHandler, onOpen?: (
 export function connectWebSocket(token: string, eventHandler: EventHandler, onOpen?: () => void) {
   disconnectWebSocket();
   handler = eventHandler;
-
-  // getWsUrl() reads from store at call time — picks up any server URL set
   socket = new WebSocket(`${getWsUrl()}?token=${encodeURIComponent(token)}`);
 
   socket.onopen = () => {

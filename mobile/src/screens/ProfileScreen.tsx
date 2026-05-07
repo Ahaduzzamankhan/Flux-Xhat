@@ -56,11 +56,7 @@ const ProfileScreen = () => {
 
   return (
     <SafeAreaView style={s.root}>
-      <ScreenHeader
-        title="Profile"
-        subtitle="Account settings"
-        onBack={() => navigation.goBack()}
-      />
+      <ScreenHeader title="Profile" subtitle="Account settings" onBack={() => navigation.goBack()} />
 
       <View style={s.card}>
         <Avatar name={username || user.email} uri={avatar} size={72} online />
@@ -72,12 +68,7 @@ const ProfileScreen = () => {
 
       <View style={s.form}>
         <AppTextInput label="Username" value={username} onChangeText={setUsername} />
-        <AppTextInput
-          label="Avatar URL"
-          value={avatar}
-          onChangeText={setAvatar}
-          autoCapitalize="none"
-        />
+        <AppTextInput label="Avatar URL" value={avatar} onChangeText={setAvatar} autoCapitalize="none" />
         <AppTextInput label="Status" value={status} onChangeText={setStatus} />
 
         <View style={s.keyBox}>
@@ -93,18 +84,8 @@ const ProfileScreen = () => {
         {error ? <Text style={s.error}>{error}</Text> : null}
 
         <AppButton title="Save profile" onPress={handleSave} loading={saving} />
-        <AppButton
-          title="Change server"
-          variant="secondary"
-          onPress={handleChangeServer}
-          style={s.mt}
-        />
-        <AppButton
-          title="Logout"
-          variant="danger"
-          onPress={handleLogout}
-          style={s.mt}
-        />
+        <AppButton title="Change server" variant="secondary" onPress={handleChangeServer} style={s.mt} />
+        <AppButton title="Logout" variant="danger" onPress={handleLogout} style={s.mt} />
       </View>
     </SafeAreaView>
   );
@@ -134,12 +115,7 @@ const s = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.border,
   },
-  keyBox: {
-    padding: 12,
-    borderRadius: radius.sm,
-    backgroundColor: colors.surfaceMuted,
-    marginBottom: 10,
-  },
+  keyBox: { padding: 12, borderRadius: radius.sm, backgroundColor: colors.surfaceMuted, marginBottom: 10 },
   serverBox: {
     padding: 12,
     borderRadius: radius.sm,

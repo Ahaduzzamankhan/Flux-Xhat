@@ -1,26 +1,17 @@
 import { StyleSheet } from 'react-native';
 
 export const colors = {
-  // Backgrounds
   background: '#050508',
   surface: '#0D0D12',
   surfaceMuted: '#141419',
-
-  // Brand
-  primary: '#00F0FF',       // Cyan neon
+  primary: '#00F0FF',
   primarySoft: 'rgba(0, 240, 255, 0.12)',
   primaryDark: '#007A85',
-  accent: '#8B5CF6',        // Violet
-
-  // Text
+  accent: '#8B5CF6',
   ink: '#EAEAF0',
   inkMuted: '#8888A0',
   inkSoft: '#444460',
-
-  // Borders
   border: 'rgba(255, 255, 255, 0.08)',
-
-  // Status
   success: '#22C55E',
   danger: '#FF4757',
   dangerSoft: 'rgba(255, 71, 87, 0.18)',

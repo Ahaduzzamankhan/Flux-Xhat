@@ -7,10 +7,7 @@ export type AuthResponse = {
 };
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
-  const response = await api.post<AuthResponse>('/auth/login', {
-    email,
-    password,
-  });
+  const response = await api.post<AuthResponse>('/auth/login', { email, password });
   return response.data;
 }
 

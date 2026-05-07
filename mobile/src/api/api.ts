@@ -12,7 +12,6 @@ export function getWsUrl(): string {
   return `${host}/ws`;
 }
 
-// Axios instance with dynamic baseURL resolver
 export const api = axios.create({ timeout: 15000 });
 
 api.interceptors.request.use((config) => {

@@ -35,7 +35,6 @@ const LoginScreen = () => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      {/* Decorative Orbs */}
       <View style={[styles.orb, styles.orbTop]} />
       <View style={[styles.orb, styles.orbBottom]} />
 
@@ -78,15 +77,8 @@ const LoginScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-    backgroundColor: colors.background,
-  },
-  hero: {
-    marginBottom: 28,
-  },
+  container: { flex: 1, padding: 20, justifyContent: 'center', backgroundColor: colors.background },
+  hero: { marginBottom: 28 },
   mark: {
     width: 56,
     height: 56,
@@ -96,21 +88,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 18,
   },
-  markText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '900',
-  },
-  title: {
-    color: colors.ink,
-    fontSize: 34,
-    fontWeight: '900',
-  },
-  subtitle: {
-    color: colors.inkMuted,
-    fontSize: 16,
-    marginTop: 8,
-  },
+  markText: { color: '#FFFFFF', fontSize: 18, fontWeight: '900' },
+  title: { color: colors.ink, fontSize: 34, fontWeight: '900' },
+  subtitle: { color: colors.inkMuted, fontSize: 16, marginTop: 8 },
   panel: {
     backgroundColor: 'rgba(10, 10, 10, 0.65)',
     borderRadius: radius.lg,
@@ -123,43 +103,13 @@ const styles = StyleSheet.create({
     shadowRadius: 30,
     elevation: 10,
   },
-  orb: {
-    position: 'absolute',
-    width: 250,
-    height: 250,
-    borderRadius: 125,
-    opacity: 0.15,
-  },
-  orbTop: {
-    top: -50,
-    right: -50,
-    backgroundColor: colors.primary,
-  },
-  orbBottom: {
-    bottom: -50,
-    left: -50,
-    backgroundColor: colors.accent,
-  },
-  bottomRow: {
-    marginTop: 22,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  smallText: {
-    color: colors.inkMuted,
-    marginRight: 8,
-  },
-  link: {
-    color: colors.primary,
-    fontWeight: '800',
-  },
-  error: {
-    color: colors.danger,
-    marginBottom: 14,
-    textAlign: 'center',
-    fontWeight: '600',
-  },
+  orb: { position: 'absolute', width: 250, height: 250, borderRadius: 125, opacity: 0.15 },
+  orbTop: { top: -50, right: -50, backgroundColor: colors.primary },
+  orbBottom: { bottom: -50, left: -50, backgroundColor: colors.accent },
+  bottomRow: { marginTop: 22, flexDirection: 'row', justifyContent: 'center' },
+  smallText: { color: colors.inkMuted, marginRight: 8 },
+  link: { color: colors.primary, fontWeight: '800' },
+  error: { color: colors.danger, marginBottom: 14, textAlign: 'center', fontWeight: '600' },
 });
 
 export default LoginScreen;
-

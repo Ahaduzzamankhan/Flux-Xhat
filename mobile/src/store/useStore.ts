@@ -53,9 +53,7 @@ export const useStore = create<AppState>((set) => ({
       AsyncStorage.getItem(USER_PROFILE_KEY),
       AsyncStorage.getItem(SERVER_URL_KEY),
     ]);
-    if (serverUrl) {
-      set({ serverUrl });
-    }
+    if (serverUrl) set({ serverUrl });
     if (token && userJson) {
       try {
         const user = JSON.parse(userJson) as UserProfile;
