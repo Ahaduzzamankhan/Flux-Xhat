@@ -1,10 +1,11 @@
 buildscript {
     ext {
-        buildToolsVersion = "33.0.0"
+        buildToolsVersion = "33.0.1"
         minSdkVersion = 21
-        compileSdkVersion = 33
-        targetSdkVersion = 33
+        compileSdkVersion = 34
+        targetSdkVersion = 34
         ndkVersion = "25.1.8937393"
+        kotlinVersion = "1.8.22"
     }
     repositories {
         google()
@@ -14,5 +15,39 @@ buildscript {
         classpath("com.android.tools.build:gradle:8.1.1")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("com.google.gms:google-services:4.4.4")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    }
+}
+
+project(":react-native-image-picker") {
+    afterEvaluate { project ->
+        project.dependencies {
+            add("implementation", "androidx.activity:activity:1.9.0")
+            add("implementation", "androidx.activity:activity-ktx:1.9.0")
+        }
+    }
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            android {
+                compileOptions {
+                    sourceCompatibility JavaVersion.VERSION_11
+                    targetCompatibility JavaVersion.VERSION_11
+                }
+                
+                // Ensure buildConfig is enabled (needed for some libraries)
+                buildFeatures {
+                    buildConfig true
+                }
+
+                if (project.plugins.hasPlugin("kotlin-android")) {
+                    kotlinOptions {
+                        jvmTarget = "11"
+                    }
+                }
+            }
+        }
     }
 }
