@@ -1,7 +1,7 @@
 buildscript {
     ext {
         buildToolsVersion = "33.0.1"
-        minSdkVersion = 21
+        minSdkVersion = 23
         compileSdkVersion = 34
         targetSdkVersion = 34
         ndkVersion = "25.1.8937393"
@@ -36,8 +36,7 @@ subprojects {
                     sourceCompatibility JavaVersion.VERSION_11
                     targetCompatibility JavaVersion.VERSION_11
                 }
-                
-                // Ensure buildConfig is enabled (needed for some libraries)
+
                 buildFeatures {
                     buildConfig true
                 }
