@@ -25,12 +25,12 @@ import {
   sendTypingEvent,
 } from '../api/websocket';
 import { decryptMessage, encryptMessage, getPrivateKey } from '../crypto/e2ee';
-import { MessageMetadata, UserProfile } from '../types';
+import { MessageMetadata, UserProfile } from '../types/index';
 import { RootStackParamList } from '../navigation';
 import MessageBubble from '../components/MessageBubble';
 import Avatar from '../components/Avatar';
 import ScreenHeader from '../components/ScreenHeader';
-import { colors, radius } from '../theme';
+import { colors, radius } from '../config/theme';
 
 type UiMessage = MessageMetadata & {
   own: boolean;
@@ -307,7 +307,8 @@ const styles = StyleSheet.create({
   identityStrip: {
     marginHorizontal: 20,
     marginBottom: 8,
-    padding: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     borderRadius: radius.md,
     backgroundColor: colors.primarySoft,
     flexDirection: 'row',
@@ -358,7 +359,7 @@ const styles = StyleSheet.create({
     flex: 1,
     minHeight: 44,
     maxHeight: 116,
-    borderRadius: radius.md,
+    borderRadius: radius.pill,
     backgroundColor: colors.surfaceMuted,
     paddingHorizontal: 14,
     paddingVertical: 11,

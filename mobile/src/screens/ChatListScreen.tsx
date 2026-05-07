@@ -12,12 +12,12 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { useStore } from '../store/useStore';
 import { fetchChats, createChat, searchUsers } from '../api/chat';
-import { Chat, UserProfile } from '../types';
+import { Chat, UserProfile } from '../types/index';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import Avatar from '../components/Avatar';
 import ScreenHeader from '../components/ScreenHeader';
-import { colors, radius, shadow } from '../theme';
+import { colors, radius, shadow } from '../config/theme';
 
 type ListItem = Chat | UserProfile;
 
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   row: {
     minHeight: 76,
     padding: 14,
-    borderRadius: radius.md,
+    borderRadius: radius.lg,
     backgroundColor: colors.surface,
     marginBottom: 10,
     borderWidth: 1,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   },
   rowPressed: { opacity: 0.78 },
   rowCopy: { flex: 1, marginLeft: 12 },
-  rowTitle: { color: colors.ink, fontSize: 16, fontWeight: '800' },
+  rowTitle: { color: colors.ink, fontSize: 17, fontWeight: '700' },
   rowSubtitle: { color: colors.inkMuted, fontSize: 13, marginTop: 5 },
   chevron: {
     width: 28,

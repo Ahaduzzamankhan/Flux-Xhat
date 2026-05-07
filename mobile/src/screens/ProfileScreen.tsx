@@ -8,7 +8,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import Avatar from '../components/Avatar';
 import ScreenHeader from '../components/ScreenHeader';
-import { colors, radius } from '../theme';
+import { colors, radius } from '../config/theme';
 
 const ProfileScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();

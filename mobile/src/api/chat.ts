@@ -1,5 +1,5 @@
 import { api, authHeaders } from './api';
-import { Chat, MessageMetadata, UserProfile } from '../types';
+import { Chat, MessageMetadata, UserProfile } from '../types/index';
 
 export async function fetchChats(token: string): Promise<Chat[]> {
   const response = await api.get<Chat[]>('/chats', { headers: authHeaders(token) });

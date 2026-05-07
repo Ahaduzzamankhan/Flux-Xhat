@@ -1,5 +1,5 @@
 import { api, authHeaders } from './api';
-import { MediaMetadata } from '../types';
+import { MediaMetadata } from '../types/index';
 
 export type SignedUpload = {
   upload_url: string;

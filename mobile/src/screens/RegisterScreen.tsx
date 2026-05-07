@@ -7,7 +7,7 @@ import { storeKeyPair, generateKeyPair } from '../crypto/e2ee';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import { useStore } from '../store/useStore';
-import { colors, radius, shadow } from '../theme';
+import { colors, radius, shadow } from '../config/theme';
 
 const RegisterScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
@@ -40,6 +40,9 @@ const RegisterScreen = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <View style={styles.hero}>
+        <View style={styles.mark}>
+          <Text style={styles.markText}>FX</Text>
+        </View>
         <Text style={styles.title}>Create Account</Text>
         <Text style={styles.subtitle}>Your encryption keys are generated on this device.</Text>
       </View>
@@ -76,15 +79,29 @@ const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, justifyContent: 'center', backgroundColor: colors.background },
   hero: { marginBottom: 28 },
+  mark: {
+    width: 56,
+    height: 56,
+    borderRadius: radius.md,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 18,
+  },
+  markText: { color: '#FFFFFF', fontSize: 18, fontWeight: '900' },
   title: { color: colors.ink, fontSize: 34, fontWeight: '900' },
   subtitle: { color: colors.inkMuted, fontSize: 16, marginTop: 8 },
   panel: {
-    backgroundColor: colors.surface,
-    borderRadius: radius.md,
-    padding: 18,
+    backgroundColor: 'rgba(10, 10, 10, 0.65)',
+    borderRadius: radius.lg,
+    padding: 24,
     borderWidth: 1,
-    borderColor: colors.border,
-    ...shadow,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.15,
+    shadowRadius: 30,
+    elevation: 10,
   },
   bottomRow: { marginTop: 22, flexDirection: 'row', justifyContent: 'center' },
   smallText: { color: colors.inkMuted, marginRight: 8 },

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
-import { Chat, MessageMetadata, UserProfile } from '../types';
+import { Chat, MessageMetadata, UserProfile } from '../types/index';
 
 const AUTH_TOKEN_KEY = 'PRIVATE_CHAT_AUTH_TOKEN';
 const USER_PROFILE_KEY = 'PRIVATE_CHAT_USER_PROFILE';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { MessageMetadata } from '../types';
-import { colors, radius } from '../theme';
+import { MessageMetadata } from '../types/index';
+import { colors, radius } from '../config/theme';
 
 type Props = {
   message: MessageMetadata;
@@ -38,10 +38,10 @@ const MessageBubble = ({ message, isOwn, decryptedText }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: { marginVertical: 5, marginHorizontal: 16, flexDirection: 'row' },
+  container: { marginVertical: 4, marginHorizontal: 16, flexDirection: 'row' },
   left: { justifyContent: 'flex-start' },
   right: { justifyContent: 'flex-end' },
-  bubble: { maxWidth: '78%', paddingHorizontal: 14, paddingVertical: 11, borderRadius: radius.md },
+  bubble: { maxWidth: '78%', paddingHorizontal: 16, paddingVertical: 12, borderRadius: radius.md },
   bubbleOwn: { backgroundColor: colors.primary, borderBottomRightRadius: 4 },
   bubbleGuest: {
     backgroundColor: colors.surface,
